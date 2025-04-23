@@ -197,7 +197,7 @@ r2dbc:
 ## ▶️ Running the Application with Docker
 First build in the main project folder build the Spring Boot archive
 ```bash
-./gradlew :customer-transaction-toolkit:customer-transaction-toolkit-api:bootRun
+./gradlew :customer-transaction-toolkit:customer-transaction-toolkit-api:bootJar
 ```
 
 ### Start the application
