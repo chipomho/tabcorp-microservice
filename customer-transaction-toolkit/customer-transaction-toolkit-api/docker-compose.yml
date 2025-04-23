@@ -11,7 +11,7 @@ services:
     environment:
       #set to true to allow the application to drop messages on RabbitMQ instead of Database
       #set to false to allow messages to save directly to the database
-      APPLICATION_MESSAGING_MODE: false
+      APPLICATION_MESSAGING_MODE: true
       R2DBC_DATASOURCE_URL: r2dbc:pool:postgresql://postgres:5432/tabcorp
       R2DBC_DATASOURCE_USERNAME: tabcorp
       R2DBC_DATASOURCE_PASSWORD: tabcorp

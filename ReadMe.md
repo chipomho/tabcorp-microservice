@@ -201,7 +201,10 @@ First build in the main project folder build the Spring Boot archive
 ```
 
 ### Start the application
+First change directory to **customer-transaction-toolkit\customer-transaction-toolkit-api**
 ```bash
+cd customer-transaction-toolkit/customer-transaction-toolkit-api
+#start the application - this will automatically start all the required services (redis, postgresql and rabbitmq)
 docker-compose up --build 
 ```
 
