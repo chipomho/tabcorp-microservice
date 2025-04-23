@@ -1,0 +1,47 @@
+{
+  "vhosts": [
+    {
+      "name": "Tabcorp"
+    }
+  ],
+  "users": [
+    {
+      "name": "tabcorp",
+      "password": "tabcorp",
+      "tags": "administrator"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "tabcorp",
+      "vhost": "Tabcorp",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "queues": [
+    {
+      "name": "Tabcorp.TechnicalTask.Queue",
+      "vhost": "Tabcorp",
+      "durable": true
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "Tabcorp.TechnicalTask.Exchange",
+      "vhost": "Tabcorp",
+      "type": "direct",
+      "durable": true
+    }
+  ],
+  "bindings": [
+    {
+      "source": "Tabcorp.TechnicalTask.Exchange",
+      "vhost": "Tabcorp",
+      "destination": "Tabcorp.TechnicalTask.Queue",
+      "destination_type": "queue",
+      "routing_key": "customer-transaction"
+    }
+  ]
+}

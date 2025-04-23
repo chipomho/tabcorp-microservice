@@ -1,0 +1,92 @@
+services:
+  app:
+    container_name: customer-transaction
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+      - redis
+      - rabbitmq
+    environment:
+      #set to true to allow the application to drop messages on RabbitMQ instead of Database
+      #set to false to allow messages to save directly to the database
+      APPLICATION_MESSAGING_MODE: false
+      R2DBC_DATASOURCE_URL: r2dbc:pool:postgresql://postgres:5432/tabcorp
+      R2DBC_DATASOURCE_USERNAME: tabcorp
+      R2DBC_DATASOURCE_PASSWORD: tabcorp
+
+      SPRING_REDIS_HOST: redis
+      SPRING_REDIS_PORT: 6379
+
+      SPRING_RABBITMQ_VIRTUAL_HOST: Tabcorp
+      SPRING_RABBITMQ_NODES: rabbitmq:5672
+      SPRING_RABBITMQ_USERNAME: tabcorp
+      SPRING_RABBITMQ_PASSWORD: tabcorp
+
+    ports:
+      - "8080:8080"
+    networks:
+      - app-net
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: tabcorp
+      POSTGRES_USER: tabcorp
+      POSTGRES_PASSWORD: tabcorp
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "tabcorp"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-net
+
+  redis:
+    image: redis:7
+    container_name: redis
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    ports:
+      - "6379:6379"
+    networks:
+      - app-net
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      RABBITMQ_DEFAULT_USER: tabcorp
+      RABBITMQ_DEFAULT_PASS: tabcorp
+      RABBITMQ_DEFAULT_VHOST: Tabcorp
+      RABBITMQ_LOAD_DEFINITIONS: /etc/rabbitmq/definitions.json
+    ports:
+      - "5672:5672"     # AMQP
+      - "15672:15672"   # Management UI
+    volumes:
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
+
+volumes:
+  postgres_data:

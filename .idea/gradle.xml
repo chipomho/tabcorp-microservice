@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/customer-transaction-common" />
+            <option value="$PROJECT_DIR$/customer-transaction-core" />
+            <option value="$PROJECT_DIR$/customer-transaction-data" />
+            <option value="$PROJECT_DIR$/customer-transaction-messaging" />
+            <option value="$PROJECT_DIR$/customer-transaction-messaging/customer-transaction-infrastructure" />
+            <option value="$PROJECT_DIR$/customer-transaction-messaging/customer-transaction-messaging-service" />
+            <option value="$PROJECT_DIR$/customer-transaction-toolkit" />
+            <option value="$PROJECT_DIR$/customer-transaction-toolkit/customer-transaction-toolkit-api" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

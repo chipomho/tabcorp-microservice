@@ -1,0 +1,115 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.18'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id "jacoco"
+}
+
+group = 'au.com.tabcorp'
+version = '1.0-SNAPSHOT'
+
+subprojects {
+
+    apply plugin  : 'java-library'
+    apply plugin  : 'org.springframework.boot'
+    apply plugin  : 'io.spring.dependency-management'
+    apply plugin  : 'jacoco'
+
+
+    def coverageExclusions = ext.has('coverageExclusions') ?  ext.get("coverageExclusions").split(",") : []
+
+    java {
+        toolchain {
+            //languageVersion = JavaLanguageVersion.of("1.8")
+        }
+
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+        withSourcesJar()
+        //withJavadocJar()
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+
+
+    dependencies {
+
+        annotationProcessor libs.lombok
+
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+        implementation libs.springdoc.openapi
+
+        testImplementation platform('org.junit:junit-bom:5.13.0-M2')
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+    }
+
+
+    jacocoTestReport {
+        dependsOn test // tests are required to run before generating the report
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: coverageExclusions )
+            }))
+        }
+    }
+
+    jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                failOnViolation = project.hasProperty('cobertura.continueonfailure') ? false : true
+                element='PACKAGE'
+                excludes = ext.has('coverageExclusions') ?  ext.get("coverageExclusions").split(",") : []
+                limit {
+                    counter='COMPLEXITY'
+                    value='COVEREDRATIO'
+                    minimum = 0.7
+                }
+                limit {
+                    counter='LINE'
+                    value='COVEREDRATIO'
+                    minimum = 0.7
+                }
+                limit {
+                    counter='CLASS'
+                    value='COVEREDRATIO'
+                    minimum = 0.8
+                }
+            }
+        }
+    }
+
+
+    test {
+        useJUnitPlatform()
+        minHeapSize = "1024m" // initial heap size
+        maxHeapSize = "2048m" // maximum heap size
+        jvmArgs '-XX:MaxMetaspaceSize=2048m' // mem argument for the test JVM
+
+        jacoco {
+            enabled = true
+            destinationFile = layout.buildDirectory.file("jacoco/${name}.exec").get().asFile
+            includes = []
+            excludes = []
+            excludeClassLoaders = []
+            includeNoLocationClasses = false
+            dumpOnExit = true
+            classDumpDir = null
+            output = JacocoTaskExtension.Output.FILE
+            jmx = false
+        }
+
+    }
+
+}

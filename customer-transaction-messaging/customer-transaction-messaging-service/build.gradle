@@ -1,0 +1,21 @@
+bootJar{
+    enabled = false
+}
+
+jar{
+    enabled = true
+}
+
+dependencies{
+    api project(':customer-transaction-data')
+
+    api 'com.fasterxml.jackson.module:jackson-module-parameter-names'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8'
+
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'io.projectreactor.rabbitmq:reactor-rabbitmq:1.5.4'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+}
+

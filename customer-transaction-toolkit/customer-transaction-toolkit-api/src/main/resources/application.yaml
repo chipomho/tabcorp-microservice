@@ -1,0 +1,105 @@
+tabcorp:
+  security:
+    #RSA keys used to set public/private keys to sign JWT tokens
+    #keys should be stored in a secure storage
+    rsa:
+      #Public Key
+      public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuIq6rNofy9nKzhBo7jb2kVZKgTsXaanHvl9kZucRXWA8ZJuES+AVDNKyHjFb4w71pibomCdJ/pFD2TaHsvThc/hpE9AJiJvzutePCSbR4rh96XgucVV/vDirYtFjSso0QRYClo7Mjhx12DzrUPoVxJxlIVmBMvWG19LiPvD7WTd91OYq2bBWtFYCsNXb/W+5cyvktNgB5N7dkA3ehORy0tQEDbAhgS6HP+FyPYOiw4amvKuz7eaHzUmfjK9CHMnXBwNJiDcwKD7PEbSnGjJeuEAMr8cyMeG6ZH7GN6S5CCEDlDJWL6eIfRs/3WOS7e6sy26S7C/U+PR31mKxUBThcwIDAQAB
+      #Private Key
+      private-key: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC4irqs2h/L2crOEGjuNvaRVkqBOxdpqce+X2Rm5xFdYDxkm4RL4BUM0rIeMVvjDvWmJuiYJ0n+kUPZNoey9OFz+GkT0AmIm/O6148JJtHiuH3peC5xVX+8OKti0WNKyjRBFgKWjsyOHHXYPOtQ+hXEnGUhWYEy9YbX0uI+8PtZN33U5irZsFa0VgKw1dv9b7lzK+S02AHk3t2QDd6E5HLS1AQNsCGBLoc/4XI9g6LDhqa8q7Pt5ofNSZ+Mr0IcydcHA0mINzAoPs8RtKcaMl64QAyvxzIx4bpkfsY3pLkIIQOUMlYvp4h9Gz/dY5Lt7qzLbpLsL9T49HfWYrFQFOFzAgMBAAECgf8LLFshHBPQw98Dmvq/cZR8OD1KlclVHHJ7lEr/7/2dKbZ+YOwhq++aVydxrItjtAQriy+KBtb0EteIz0RoEWuVGfVCvdXV75tSNLr0UuViVMlK2Xv2YLbbLpMx6Huai6OeTTba5sp70D1SWl3lCT9IKC/3VPP9oeAIMTyBkxWk0Rz7A2WBSgKq3l1qTG4kUFaODvj9/id5R8dmSrV5qgQ+MqWTc42WVEF9EdKhIS33ArtWu0kYKTeOXrPSWX/HLPPMitwqM0wTE+PGa73eZpUATWmkgKgAy/k0B7gbwpd6kH5SxTKL/PHeojJgNuOi1q1UxW67LKFSNMbImF4BpUUCgYEA22M3pjj18lv0n8QfysSqI3KhLwssIjMtRH1bN14v97QXxQtfy7PKCV2Ee9p99AKIclSqT2UEbF2KokLtkR7y9VcN2gTo2NidHo57f2VhENOxSp/c0aHS8puS65SHoezup6VDfqGSUfnbOOKt/FlSLXmKfKOPnCKeSu4Lz1Tu11UCgYEA11bRlNd4EntpHCwTdU2D2jwOYj7jQ1fvfVOYFlpZxvopbAjzXWw9yzfTsQj4UlrBJmBaLZpIUagd0NVIx6hfdsCPtmmIxmI27MAoXLq5V8VvJhFQy9Ll4I8OKu3HNDFkXcmLZvZfrHmyivPrBGePESl0YJEu5lTpNVXQQ2ZKxacCgYBDIM/FT8aJuvNV83fa3mRE5m1FbMC7Ujd2rni7r1k0DOn9A+by+HdIeFHyZ7+Ea0X+3cMi+gDpe5HQ5nO0pOiog1Ocs0XgHB+vWt+U8ptJv8yOze2OQ1q9mzbQWKlLtaisqVfGpn+UD8SxWkLsZRRND9R9ILrvhnQy7zWz4gQW5QKBgQCadQufV24o05xxOKw8V31b6/flQHaCt3Bw1KUiY2xB7O4JL+JgAGPSgBi3w1dauv4QKMyGKUP2TkAUquepTnwrEbQDg2833PrIloxc9xI6gsNW6tSpXnzEtdfTsvpP1Z3IJ+h10gKOFDycrpjEcAOOq81t9rVNQVqFhyf7MEQxwQKBgQC2RXLc1Tz1Y2Ogh0zK7SgHUS42AkND/Zb/ReyWo1KBhqsyEg2f1VfYwxTQv1Q1cRh5s7ibtpRGK5C5dS5Ix33zanhmDJAxNmCD7HmLaFpjeDeaKbsDupRHgpTCL2bEH2LR2ZvX8YPMxRbMF4bYG3t7QoMrfpYqe/1Dd2UYc2KOlg==
+    #the following users are used for security for testing purposes only
+    in-memory-users:
+      #default expiration of the token is 30minutes
+      expires-in: 1800
+      users:
+        - username: standard
+          password: Standard$Pass2025
+          roles: #adding roles the following are valid STANDARD, PRODUCT, CUSTOMER
+            - STANDARD
+        - username: admin
+          password: Admin$Pass2025
+          roles:
+            - STANDARD
+            - PRODUCT
+            - CUSTOMER
+        - username: product
+          password: Product$Pass2025
+          roles:
+            - STANDARD
+            - PRODUCT
+        - username: customer
+          password: Cust$Pass2025
+          roles:
+            - STANDARD
+            - CUSTOMER
+  app:
+    messaging-mode: ${APPLICATION_MESSAGING_MODE}
+    validation:
+      transactions:
+        maximum-cost: 5000
+      messages:
+        validator-prefix: ValidationMessages
+    r2dbc:
+      data:
+        url: ${spring.r2dbc.url}
+        user: ${spring.r2dbc.username}
+        password: ${spring.r2dbc.password}
+
+
+spring:
+  redis:
+    host: ${SPRING_REDIS_HOST}
+    port: ${SPRING_REDIS_PORT}
+  rabbitmq:
+    #username: guest
+    username: ${SPRING_RABBITMQ_USERNAME}
+    #password: guest
+    password: ${SPRING_RABBITMQ_PASSWORD}
+    virtual-host: ${SPRING_RABBITMQ_VIRTUAL_HOST}
+    #node-addresses: localhost
+    node-addresses: ${SPRING_RABBITMQ_NODES}
+    exchange: Tabcorp.TechnicalTask.Exchange
+    queue: Tabcorp.TechnicalTask.Queue
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: yyyy-MM-dd'T'HH:mm:ss
+  r2dbc:
+    #url: r2dbc:pool:postgresql://localhost:5432/tabcorp
+    url: ${R2DBC_DATASOURCE_URL}
+    #username: tabcorp
+    username: ${R2DBC_DATASOURCE_USERNAME}
+    #password: tabcorp
+    password: ${R2DBC_DATASOURCE_PASSWORD}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://api.tabcorp.com.au/oauth2/default
+r2dbc:
+  pool:
+    initial-size: 64
+    max-size: 1024
+
+
+#logging:
+#  level:
+#    io:
+#      r2dbc:
+#        postgresql:
+#          QUERY: DEBUG
+#          PARAM: DEBUG
+#    reactor:
+#      netty: DEBUG
+#    org:
+#      springframework:
+#        data:
+#          r2dbc:
+#            core: DEBUG
+#        r2dbc:
+#          core: DEBUG
+#        web:
+#          reactive: DEBUG
+#
+#

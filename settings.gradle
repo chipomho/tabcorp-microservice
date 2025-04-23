@@ -1,0 +1,73 @@
+pluginManagement {
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            version ("lombok-version","1.18.34")
+            version('h2-version','2.1.214')
+            version('commons-collections-version','4.5.0-M2')
+            version('commons-lang3-version','3.17.0')
+            version('commons-codec-version','1.17.1')
+            version('jsonwebtoken-version','0.12.6')
+            version('bouncycastle-version','1.78.1')
+            version('springdoc-openapi-version','1.7.0')//'2.7.0');//
+            version('commons-dbcp2-version','2.12.0')
+            version('postgresql-version','42.7.4')
+            version('apache-derby-version','10.17.1.0')
+            version('rabbitmq-amqp-client-version','5.22.0')
+            version('hibernate-version','5.4.33.Final')
+            version('r2dbc-postgresql-version','0.8.13.RELEASE')
+            version('r2dbc-h2-version','1.0.0.RELEASE')
+
+            //"io.r2dbc:r2dbc-h2:1.0.0.RELEASE"
+
+            library('r2dbc-postgresql','io.r2dbc','r2dbc-postgresql').versionRef('r2dbc-postgresql-version')
+            //library('springdoc-openapi','org.springdoc','springdoc-openapi-starter-webmvc-ui').versionRef('springdoc-openapi-version')
+
+            library('springdoc-openapi','org.springdoc','springdoc-openapi-ui').versionRef('springdoc-openapi-version')
+            library('bouncycastle','org.bouncycastle','bcprov-jdk18on').versionRef('bouncycastle-version')
+            library('jjwt-api','io.jsonwebtoken','jjwt-api').versionRef('jsonwebtoken-version')
+            library('jjwt-impl','io.jsonwebtoken','jjwt-impl').versionRef('jsonwebtoken-version')
+            library('jjwt-jackson','io.jsonwebtoken','jjwt-jackson').versionRef('jsonwebtoken-version')
+            library('commons-codec','commons-codec','commons-codec').versionRef('commons-codec-version')
+            library('commons-lang3','org.apache.commons','commons-lang3').versionRef('commons-lang3-version')
+            library('commons-collections4','org.apache.commons','commons-collections4').versionRef('commons-collections-version')
+            library('commons-dbcp2','org.apache.commons','commons-dbcp2').versionRef('commons-dbcp2-version')
+            library('jdbc-h2','com.h2database','h2').versionRef('h2-version')
+            library('jdbc-postgresql','org.postgresql','postgresql').versionRef('postgresql-version')
+            library('jdbc-derby','org.apache.derby','derby').versionRef('apache-derby-version')
+            library('jdbc-derbyclient','org.apache.derby','derbyclient').versionRef('apache-derby-version')
+            library('jdbc-derbynet','org.apache.derby','derbynet').versionRef('apache-derby-version')
+            library('lombok','org.projectlombok','lombok').versionRef('lombok-version')
+            library('rabbitmq-client','com.rabbitmq','amqp-client').versionRef('rabbitmq-amqp-client-version')
+            library('hibernate-core','org.hibernate.orm','hibernate-core').versionRef('hibernate-version')
+            library('r2dbc-h2','io.r2dbc','r2dbc-h2').versionRef('r2dbc-h2-version')
+            //library('javax.persistence','jakarta.persistence','jakarta.persistence-api').versionRef('jakarta.persistence-api-version')
+
+        }
+    }
+
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+
+}
+
+rootProject.name = 'tabcorp-technical-task'
+include 'customer-transaction-common'
+include 'customer-transaction-data'
+include 'customer-transaction-messaging:customer-transaction-infrastructure'
+include 'customer-transaction-messaging:customer-transaction-messaging-service'
+include 'customer-transaction-core'
+include 'customer-transaction-toolkit:customer-transaction-toolkit-api'

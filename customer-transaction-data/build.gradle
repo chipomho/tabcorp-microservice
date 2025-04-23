@@ -1,0 +1,27 @@
+bootJar{
+    enabled = false
+}
+
+jar{
+    enabled = true
+}
+
+dependencies{
+
+    api project(':customer-transaction-common')
+
+    api 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    api 'org.springframework.boot:spring-boot-autoconfigure'
+
+    testImplementation 'io.r2dbc:r2dbc-h2'
+    testImplementation 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+
+    implementation "org.postgresql:r2dbc-postgresql"
+    implementation "io.r2dbc:r2dbc-spi"
+
+    //testImplementation libs.r2dbc.h2
+
+}
+
